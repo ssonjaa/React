@@ -66,7 +66,7 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-  .loader {
+  .loader-spinner {
     border: 10px solid #f3f3f3;
     border-top: 10px solid #8e9297;
     border-radius: 50%;
