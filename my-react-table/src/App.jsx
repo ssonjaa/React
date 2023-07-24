@@ -30,7 +30,7 @@ function App() {
     return (data.value > 0 && { color: 'green' }) || (data.value < 0 && { color: 'red' });
   }
 
-  const [columnDefs, setColumnDefs] = useState([
+  const columnDefs = [
     {field: 'symbol', filter: 'agTextColumnFilter', pinned: 'left', valueFormatter: null},
     {field: 'priceChange', cellStyle: cellColorStyle},
     {field: 'priceChangePercent', valueFormatter: percentFormatter, cellStyle: cellColorStyle},
@@ -50,7 +50,7 @@ function App() {
     {field: 'firstId'},
     {field: 'lastId'},
     {field: 'count'}
-  ]);
+  ];
 
   const defaultColDef = useMemo( () => ({
     sortable: true,
@@ -63,12 +63,13 @@ function App() {
     fetch('https://data.binance.com/api/v3/ticker/24hr')
     .then(result => result.json())
     .then(rowData => setRowData(rowData))
+    .catch((error) => console.error('Error fetching data:', error))
   },[])
 
 
   return (
     <>
-      <div className='ag-theme-alpine' style={{height: 560 , width: 1200}}>
+      <div className='ag-theme-alpine ag-style-dimensions'>
         <AgGridReact
         rowData={rowData}
         columnDefs={columnDefs}
